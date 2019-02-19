@@ -4,7 +4,7 @@ A Gradient color support progressbar.
 
 ## Screenshots
 
-![screenshot][./screenshot/gradient_circular_progress.png]
+![screenshot](./screenshot/gradient_circular_progress.png)
 
 ## Getting Started
 
