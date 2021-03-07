@@ -1,16 +1,15 @@
 library gradient_progress;
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter/material.dart';
 
 class GradientCircularProgressIndicator extends StatelessWidget {
   final double strokeWidth;
   final bool strokeRound;
   final double value;
   final Color backgroundColor;
-  final List<Color> gradientColors;
-  final List<double> gradientStops;
+  final List<Color>? gradientColors;
+  final List<double>? gradientStops;
   final double radius;
 
   /// Constructor require progress [radius] & gradient color range [gradientColors]
@@ -21,17 +20,12 @@ class GradientCircularProgressIndicator extends StatelessWidget {
   GradientCircularProgressIndicator({
     this.strokeWidth = 10.0,
     this.strokeRound = false,
-    @required this.radius,
-    @required this.gradientColors,
+    required this.radius,
+    this.gradientColors,
     this.gradientStops,
     this.backgroundColor = Colors.transparent,
-    this.value,
+    this.value = 0,
   });
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +53,14 @@ class GradientCircularProgressIndicator extends StatelessWidget {
 
 class _GradientCircularProgressPainter extends CustomPainter {
   _GradientCircularProgressPainter({
-    this.strokeWidth,
-    this.strokeRound,
-    this.value,
+    required this.strokeWidth,
+    required this.strokeRound,
+    required this.value,
     this.backgroundColor = Colors.transparent,
-    this.gradientColors,
+    required this.gradientColors,
     this.gradientStops,
     this.total = 2 * pi,
-    this.radius,
+    required this.radius,
   });
 
   final double strokeWidth;
@@ -74,18 +68,15 @@ class _GradientCircularProgressPainter extends CustomPainter {
   final double value;
   final Color backgroundColor;
   final List<Color> gradientColors;
-  final List<double> gradientStops;
+  final List<double>? gradientStops;
   final double total;
   final double radius;
 
   @override
-  void paint(Canvas canvas, Size size) {
-    if (radius != null) {
-      size = Size.fromRadius(radius);
-    }
+  void paint(Canvas canvas, Size _) {
+    final size = Size.fromRadius(radius);
 
-    double _value = (value ?? .0);
-    _value = _value.clamp(.0, 1.0) * total;
+    double _value = value.clamp(.0, 1.0) * total;
     double _start = .0;
 
     double _offset = strokeWidth / 2;

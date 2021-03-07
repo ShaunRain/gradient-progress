@@ -1,3 +1,5 @@
-## [0.0.1] - TODO: Add release date.
+## 0.1.0
+- Migrate to NNBD
 
-* TODO: Describe initial release.
+## 0.0.1
+- Initial release
